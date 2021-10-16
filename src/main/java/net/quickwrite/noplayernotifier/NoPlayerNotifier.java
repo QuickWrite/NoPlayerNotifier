@@ -11,6 +11,8 @@ import net.quickwrite.noplayernotifier.listeners.MessageListener;
 import java.io.*;
 
 /**
+ * The main class of the plugin
+ *
  * @author QuickWrite
  */
 public final class NoPlayerNotifier extends Plugin {
@@ -18,13 +20,15 @@ public final class NoPlayerNotifier extends Plugin {
     @Override
     public void onEnable() {
         if (!getDataFolder().exists()) {
-            getDataFolder().mkdir();
+            if(!getDataFolder().mkdir())
+                throw new RuntimeException("Unable to create the data folder directory");
         }
 
         File file = new File(getDataFolder(), "config.yml");
         if (!file.exists()) {
             try {
-                file.createNewFile();
+                if(file.createNewFile())
+                    throw new RuntimeException();
 
                 try (InputStream is = getResourceAsStream("config.yml");
                      OutputStream os = new FileOutputStream(file)) {
@@ -34,6 +38,7 @@ public final class NoPlayerNotifier extends Plugin {
                 throw new RuntimeException("Unable to create configuration file", e);
             }
         }
+
         Configuration configuration;
         try {
              configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
