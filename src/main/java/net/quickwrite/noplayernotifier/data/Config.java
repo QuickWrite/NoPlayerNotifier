@@ -7,7 +7,7 @@ import net.md_5.bungee.api.chat.TextComponent;
  *
  * @author QuickWrite
  */
-public class Messages {
+public class Config {
     private final String prefix;
     private final TextComponent messageServer;
     private final TextComponent messageBungee;
@@ -20,7 +20,7 @@ public class Messages {
      * @param messageServer The message when nobody is on the same server
      * @param messageBungee The message when nobody is on the same bungee
      */
-    public Messages(String prefix, String messageServer, String messageBungee) {
+    public Config(String prefix, String messageServer, String messageBungee) {
         if(prefix.equals(""))
             this.prefix = prefix;
         else

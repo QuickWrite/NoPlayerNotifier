@@ -5,13 +5,13 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
-import net.quickwrite.noplayernotifier.data.Messages;
+import net.quickwrite.noplayernotifier.data.Config;
 
 /**
  * @author QuickWrite
  */
 public class MessageListener implements Listener {
-    private final Messages messages;
+    private final Config messages;
 
     /**
      * Checks every message if a player has
@@ -19,10 +19,10 @@ public class MessageListener implements Listener {
      * is on the server and sending a
      * message.
      *
-     * @param messages The messages that are saved in the config
+     * @param config The messages that are saved in the config
      */
-    public MessageListener(Messages messages) {
-        this.messages = messages;
+    public MessageListener(Config config) {
+        this.messages = config;
     }
 
     @EventHandler

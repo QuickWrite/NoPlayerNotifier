@@ -5,7 +5,7 @@ import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
-import net.quickwrite.noplayernotifier.data.Messages;
+import net.quickwrite.noplayernotifier.data.Config;
 import net.quickwrite.noplayernotifier.listeners.MessageListener;
 
 import java.io.*;
@@ -46,13 +46,13 @@ public final class NoPlayerNotifier extends Plugin {
             throw new RuntimeException("Unable to read configuration file", e);
         }
 
-        Messages messages = new Messages(
+        Config config = new Config(
                 configuration.getString("prefix"),
                 configuration.getString("msg_nobody_online_server"),
                 configuration.getString("msg_nobody_online_bungee")
         );
 
-        getProxy().getPluginManager().registerListener(this, new MessageListener(messages));
+        getProxy().getPluginManager().registerListener(this, new MessageListener(config));
     }
 
     @Override
