@@ -1,0 +1,24 @@
+# ===================================================================================== #
+#                                                                                       #
+#     _   _       _____  _                       _   _       _   _  __ _                #
+#     | \ | |     |  __ \| |                     | \ | |     | | (_)/ _(_)              #
+#     |  \| | ___ | |__) | | __ _ _   _  ___ _ __|  \| | ___ | |_ _| |_ _  ___ _ __     #
+#     | . ` |/ _ \|  ___/| |/ _` | | | |/ _ \ '__| . ` |/ _ \| __| |  _| |/ _ \ '__|    #
+#     | |\  | (_) | |    | | (_| | |_| |  __/ |  | |\  | (_) | |_| | | | |  __/ |       #
+#     |_| \_|\___/|_|    |_|\__,_|\__, |\___|_|  |_| \_|\___/ \__|_|_| |_|\___|_|       #
+#                                  __/ |                                                #
+#                                 |___/                                                 #
+#                                                                                       #
+# ===================================================================================== #
+
+# The prefix that global messages have for the player
+prefix: "!"
+
+# The message when nobody is online on the server,
+# but some people are online on a
+# different server in the bungee network.
+msg_nobody_online_server: "Currently nobody is on this server online! To message the others write !<message>."
+
+# The message when nobody is online on
+# the whole bungee server network.
+msg_nobody_online_bungee: "Unfortunately nobody is on this server online!"
