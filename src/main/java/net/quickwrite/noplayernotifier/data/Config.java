@@ -4,6 +4,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 
 /**
+ * Storage for the configuration file.
  *
  * @author QuickWrite
  */
@@ -41,14 +42,37 @@ public class Config {
         return ChatColor.translateAlternateColorCodes('&', string);
     }
 
-    public String getPrefix() {
-        return this.prefix;
+    /**
+     * Returns if the message starts with the
+     * prefix that is specified in the config
+     *
+     * @param message The message that is checked
+     * @return If the message starts with the prefix
+     */
+    public boolean hasPrefix(String message) {
+        if(this.prefix == null) return false;
+
+        return message.startsWith(this.prefix);
     }
 
+    /**
+     * Returns the message for the
+     * NoPlayerServer event as a
+     * TextComponent
+     *
+     * @return The message
+     */
     public TextComponent getMessageServer() {
         return this.messageServer;
     }
 
+    /**
+     * Returns the message for the
+     * NoPlayerBungee event as a
+     * TextComponent
+     *
+     * @return The message
+     */
     public TextComponent getMessageBungee() {
         return this.messageBungee;
     }

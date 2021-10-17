@@ -11,7 +11,7 @@ import net.quickwrite.noplayernotifier.data.Config;
  * @author QuickWrite
  */
 public class MessageListener implements Listener {
-    private final Config messages;
+    private final Config config;
 
     /**
      * Checks every message if a player has
@@ -22,7 +22,7 @@ public class MessageListener implements Listener {
      * @param config The messages that are saved in the config
      */
     public MessageListener(Config config) {
-        this.messages = config;
+        this.config = config;
     }
 
     @EventHandler
@@ -31,33 +31,19 @@ public class MessageListener implements Listener {
                 event.isCommand() ||
                 event.isCancelled() ||
                 !(event.getSender() instanceof ProxiedPlayer) ||
-                messageStartsWith(event.toString())
+                config.hasPrefix(event.toString())
         )
             return;
 
         ProxiedPlayer player = (ProxiedPlayer)event.getSender();
 
         if(ProxyServer.getInstance().getPlayers().size() == 1) {
-            player.sendMessage(messages.getMessageBungee());
+            player.sendMessage(config.getMessageBungee());
             return;
         }
 
         if(player.getServer().getInfo().getPlayers().size() == 1) {
-            player.sendMessage(messages.getMessageServer());
-            return;
+            player.sendMessage(config.getMessageServer());
         }
-    }
-
-    /**
-     * Returns if the message starts with the
-     * prefix that is specified in the config
-     *
-     * @param message The message that is checked
-     * @return If the message starts with the prefix
-     */
-    private boolean messageStartsWith(String message) {
-        if(messages.getPrefix() == null) return false;
-
-        return message.startsWith(messages.getPrefix());
     }
 }

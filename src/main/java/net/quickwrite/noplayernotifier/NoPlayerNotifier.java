@@ -19,6 +19,34 @@ public final class NoPlayerNotifier extends Plugin {
 
     @Override
     public void onEnable() {
+        Configuration configuration = getConfiguration();
+
+        Config config = new Config(
+                configuration.getString("prefix"),
+                configuration.getString("msg_nobody_online_server"),
+                configuration.getString("msg_nobody_online_bungee")
+        );
+
+        getProxy().getPluginManager().registerListener(this, new MessageListener(config));
+    }
+
+    @Override
+    public void onDisable() {
+        // Plugin shutdown logic
+    }
+
+    /**
+     * Gets the configuration file of the plugin
+     * as a Configuration object
+     *
+     * Creates a new directory with a config when
+     * no config is available. The config is
+     * loaded from the config.yml in the
+     * resources folder.
+     *
+     * @return A Configuration object
+     */
+    private Configuration getConfiguration() {
         if (!getDataFolder().exists()) {
             if(!getDataFolder().mkdir())
                 throw new RuntimeException("Unable to create the data folder directory");
@@ -39,24 +67,10 @@ public final class NoPlayerNotifier extends Plugin {
             }
         }
 
-        Configuration configuration;
         try {
-             configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
+            return ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
         } catch(IOException e) {
             throw new RuntimeException("Unable to read configuration file", e);
         }
-
-        Config config = new Config(
-                configuration.getString("prefix"),
-                configuration.getString("msg_nobody_online_server"),
-                configuration.getString("msg_nobody_online_bungee")
-        );
-
-        getProxy().getPluginManager().registerListener(this, new MessageListener(config));
-    }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
     }
 }
