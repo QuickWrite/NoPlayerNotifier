@@ -2,9 +2,11 @@ package net.quickwrite.noplayernotifier;
 
 import com.google.common.io.ByteStreams;
 import net.md_5.bungee.api.plugin.Plugin;
+import net.md_5.bungee.api.plugin.PluginManager;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
+import net.quickwrite.noplayernotifier.commands.NPNReload;
 import net.quickwrite.noplayernotifier.data.Config;
 import net.quickwrite.noplayernotifier.listeners.MessageListener;
 
@@ -16,18 +18,18 @@ import java.io.*;
  * @author QuickWrite
  */
 public final class NoPlayerNotifier extends Plugin {
-
     @Override
     public void onEnable() {
-        Configuration configuration = getConfiguration();
+        Config config = getConfig(getConfiguration());
 
-        Config config = new Config(
-                configuration.getString("prefix"),
-                configuration.getString("msg_nobody_online_server"),
-                configuration.getString("msg_nobody_online_bungee")
-        );
+        PluginManager pluginManager = this.getProxy().getPluginManager();
 
-        getProxy().getPluginManager().registerListener(this, new MessageListener(config));
+        MessageListener messageListener = new MessageListener(config);
+
+        System.out.println("Test 1");
+        pluginManager.registerCommand(this, new NPNReload(this, messageListener));
+        System.out.println("Test 2");
+        pluginManager.registerListener(this, messageListener);
     }
 
     @Override
@@ -46,7 +48,7 @@ public final class NoPlayerNotifier extends Plugin {
      *
      * @return A Configuration object
      */
-    private Configuration getConfiguration() {
+    public Configuration getConfiguration() {
         if (!getDataFolder().exists()) {
             if(!getDataFolder().mkdir())
                 throw new RuntimeException("Unable to create the data folder directory");
@@ -72,5 +74,13 @@ public final class NoPlayerNotifier extends Plugin {
         } catch(IOException e) {
             throw new RuntimeException("Unable to read configuration file", e);
         }
+    }
+
+    public Config getConfig(Configuration configuration) {
+        return new Config(
+                configuration.getString("prefix"),
+                configuration.getString("msg_nobody_online_server"),
+                configuration.getString("msg_nobody_online_bungee")
+        );
     }
 }

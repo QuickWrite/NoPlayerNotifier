@@ -1,17 +1,24 @@
 package net.quickwrite.noplayernotifier.listeners;
 
+import com.google.common.io.ByteStreams;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
 import net.md_5.bungee.api.plugin.Listener;
+import net.md_5.bungee.config.Configuration;
+import net.md_5.bungee.config.ConfigurationProvider;
+import net.md_5.bungee.config.YamlConfiguration;
 import net.md_5.bungee.event.EventHandler;
+import net.quickwrite.noplayernotifier.NoPlayerNotifier;
 import net.quickwrite.noplayernotifier.data.Config;
+
+import java.io.*;
 
 /**
  * @author QuickWrite
  */
 public class MessageListener implements Listener {
-    private final Config config;
+    private Config config;
 
     /**
      * Checks every message if a player has
@@ -45,5 +52,14 @@ public class MessageListener implements Listener {
         if(player.getServer().getInfo().getPlayers().size() == 1) {
             player.sendMessage(config.getMessageServer());
         }
+    }
+
+    /**
+     * Sets the config attribute
+     *
+     * @param config
+     */
+    public void setConfig(Config config) {
+        this.config = config;
     }
 }
