@@ -1,18 +1,11 @@
 package net.quickwrite.noplayernotifier.listeners;
 
-import com.google.common.io.ByteStreams;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
 import net.md_5.bungee.api.plugin.Listener;
-import net.md_5.bungee.config.Configuration;
-import net.md_5.bungee.config.ConfigurationProvider;
-import net.md_5.bungee.config.YamlConfiguration;
 import net.md_5.bungee.event.EventHandler;
-import net.quickwrite.noplayernotifier.NoPlayerNotifier;
 import net.quickwrite.noplayernotifier.data.Config;
-
-import java.io.*;
 
 /**
  * @author QuickWrite
@@ -32,13 +25,18 @@ public class MessageListener implements Listener {
         this.config = config;
     }
 
+    /**
+     * When the player sends a message
+     *
+     * @param event The message event itself
+     */
     @EventHandler
     public void onPlayerChat(ChatEvent event) {
         if(
                 event.isCommand() ||
                 event.isCancelled() ||
                 !(event.getSender() instanceof ProxiedPlayer) ||
-                config.hasPrefix(event.toString())
+                config.hasPrefix(event.getMessage())
         )
             return;
 
@@ -57,7 +55,7 @@ public class MessageListener implements Listener {
     /**
      * Sets the config attribute
      *
-     * @param config
+     * @param config The config class
      */
     public void setConfig(Config config) {
         this.config = config;

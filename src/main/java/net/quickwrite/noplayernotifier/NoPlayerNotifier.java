@@ -26,9 +26,7 @@ public final class NoPlayerNotifier extends Plugin {
 
         MessageListener messageListener = new MessageListener(config);
 
-        System.out.println("Test 1");
         pluginManager.registerCommand(this, new NPNReload(this, messageListener));
-        System.out.println("Test 2");
         pluginManager.registerListener(this, messageListener);
     }
 

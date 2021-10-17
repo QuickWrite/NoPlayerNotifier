@@ -22,7 +22,7 @@ public class Config {
      * @param messageBungee The message when nobody is on the same bungee
      */
     public Config(String prefix, String messageServer, String messageBungee) {
-        if(prefix.equals(""))
+        if(!prefix.equals(""))
             this.prefix = prefix;
         else
             this.prefix = null;
