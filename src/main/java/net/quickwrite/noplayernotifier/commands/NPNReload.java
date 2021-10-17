@@ -6,6 +6,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
 import net.quickwrite.noplayernotifier.NoPlayerNotifier;
+import net.quickwrite.noplayernotifier.data.Config;
 import net.quickwrite.noplayernotifier.listeners.MessageListener;
 
 import java.util.Collections;
@@ -45,7 +46,7 @@ public class NPNReload extends Command implements TabExecutor {
             return;
         }
 
-        messageListener.setConfig(noPlayerNotifier.getConfig(noPlayerNotifier.getConfiguration()));
+        messageListener.setConfig(Config.getConfig(noPlayerNotifier.getConfiguration()));
 
         sender.sendMessage(new TextComponent(ChatColor.GREEN + "Reloaded"));
     }

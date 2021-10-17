@@ -20,7 +20,7 @@ import java.io.*;
 public final class NoPlayerNotifier extends Plugin {
     @Override
     public void onEnable() {
-        Config config = getConfig(getConfiguration());
+        Config config = Config.getConfig(getConfiguration());
 
         PluginManager pluginManager = this.getProxy().getPluginManager();
 
@@ -72,13 +72,5 @@ public final class NoPlayerNotifier extends Plugin {
         } catch(IOException e) {
             throw new RuntimeException("Unable to read configuration file", e);
         }
-    }
-
-    public Config getConfig(Configuration configuration) {
-        return new Config(
-                configuration.getString("prefix"),
-                configuration.getString("msg_nobody_online_server"),
-                configuration.getString("msg_nobody_online_bungee")
-        );
     }
 }

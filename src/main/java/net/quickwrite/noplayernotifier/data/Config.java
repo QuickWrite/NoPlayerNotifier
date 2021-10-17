@@ -2,6 +2,9 @@ package net.quickwrite.noplayernotifier.data;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.config.Configuration;
+
+import java.util.List;
 
 /**
  * Storage for the configuration file.
@@ -21,14 +24,26 @@ public class Config {
      * @param messageServer The message when nobody is on the same server
      * @param messageBungee The message when nobody is on the same bungee
      */
-    public Config(String prefix, String messageServer, String messageBungee) {
+    public Config(String prefix, List<String> messageServer, List<String> messageBungee) {
         if(!prefix.equals(""))
             this.prefix = prefix;
         else
             this.prefix = null;
 
-        this.messageServer = new TextComponent(format(messageServer));
-        this.messageBungee = new TextComponent(format(messageBungee));
+        this.messageServer = new TextComponent(format(concatenateStrings(messageServer)));
+        this.messageBungee = new TextComponent(format(concatenateStrings(messageBungee)));
+    }
+
+    /**
+     * Concatinates the strings in the list with
+     * \n so that these can be used as one
+     * simple string itself.
+     *
+     * @param messages The List of strings
+     * @return The concatenated string
+     */
+    private String concatenateStrings(List<String> messages) {
+        return String.join("\n", messages);
     }
 
     /**
@@ -75,5 +90,19 @@ public class Config {
      */
     public TextComponent getMessageBungee() {
         return this.messageBungee;
+    }
+
+    /**
+     * Returns a Config-Object instantiated.
+     *
+     * @param configuration The configuration Object
+     * @return The Config Object
+     */
+    public static Config getConfig(Configuration configuration) {
+        return new Config(
+                configuration.getString("prefix"),
+                configuration.getStringList("msg_nobody_online_server"),
+                configuration.getStringList("msg_nobody_online_bungee")
+        );
     }
 }

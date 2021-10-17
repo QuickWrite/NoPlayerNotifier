@@ -17,8 +17,10 @@ prefix: "!"
 # The message when nobody on the server is online,
 # but some people are online on a
 # different server in the bungee network.
-msg_nobody_online_server: "Currently nobody on this server is online! To message the others write !<message>."
+msg_nobody_online_server:
+  - "Currently nobody on this server is online! To message the others write !<message>."
 
 # The message when nobody is online on
 # the whole bungee server network.
-msg_nobody_online_bungee: "Currently nobody on this server is online!"
+msg_nobody_online_bungee:
+  - "Currently nobody on this server is online!"
