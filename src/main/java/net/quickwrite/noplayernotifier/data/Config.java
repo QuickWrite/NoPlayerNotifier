@@ -24,14 +24,14 @@ public class Config {
      * @param messageServer The message when nobody is on the same server
      * @param messageBungee The message when nobody is on the same bungee
      */
-    public Config(String prefix, List<String> messageServer, List<String> messageBungee) {
+    public Config(String prefix, String msgPrefix, List<String> messageServer, List<String> messageBungee) {
         if(!prefix.equals(""))
             this.prefix = prefix;
         else
             this.prefix = null;
 
-        this.messageServer = new TextComponent(format(concatenateStrings(messageServer)));
-        this.messageBungee = new TextComponent(format(concatenateStrings(messageBungee)));
+        this.messageServer = new TextComponent(format(msgPrefix + concatenateStrings(messageServer)));
+        this.messageBungee = new TextComponent(format(msgPrefix + concatenateStrings(messageBungee)));
     }
 
     /**
@@ -101,6 +101,7 @@ public class Config {
     public static Config getConfig(Configuration configuration) {
         return new Config(
                 configuration.getString("prefix"),
+                configuration.getString("msg_prefix"),
                 configuration.getStringList("msg_nobody_online_server"),
                 configuration.getStringList("msg_nobody_online_bungee")
         );

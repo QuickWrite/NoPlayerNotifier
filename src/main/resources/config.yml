@@ -14,11 +14,14 @@
 # The prefix that global messages have for the player
 prefix: "!"
 
+# The prefix for the messages that are send to the player.
+msg_prefix: "&8[&2Prefix&8]&r "
+
 # The message when nobody on the server is online,
 # but some people are online on a
 # different server in the bungee network.
 msg_nobody_online_server:
-  - "Currently nobody on this server is online! To message the others write !<message>."
+  - "Currently nobody on this server is online! To message the others, write !<message>."
 
 # The message when nobody is online on
 # the whole bungee server network.
