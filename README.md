@@ -12,6 +12,8 @@ When a player sends a message the plugin checks if only one player is on the bun
 
 When a message starts with the `prefix` no message will be send.
 
+When a player has the `noplayernotifier.bypass` permission no message will be send.
+
 When you found out that you made a mistake in the `config.yml` you can just use the `/npnreload` and the plugin reloads the config. The player needs to have the `noplayernotifier.reload` permission on the Bungee.
 
 ## Why is it useful?

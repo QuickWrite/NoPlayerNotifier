@@ -12,6 +12,7 @@ import net.quickwrite.noplayernotifier.data.Config;
  */
 public class MessageListener implements Listener {
     private Config config;
+    private final String BYPASS_PERM = "noplayernotifier.bypass";
 
     /**
      * Checks every message if a player has
@@ -41,6 +42,8 @@ public class MessageListener implements Listener {
             return;
 
         ProxiedPlayer player = (ProxiedPlayer)event.getSender();
+
+        if(player.hasPermission(BYPASS_PERM)) return;
 
         if(ProxyServer.getInstance().getPlayers().size() == 1) {
             player.sendMessage(config.getMessageBungee());
