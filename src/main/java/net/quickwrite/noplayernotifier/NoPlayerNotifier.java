@@ -55,7 +55,7 @@ public final class NoPlayerNotifier extends Plugin {
         File file = new File(getDataFolder(), "config.yml");
         if (!file.exists()) {
             try {
-                if(file.createNewFile())
+                if(!file.createNewFile())
                     throw new RuntimeException();
 
                 try (InputStream is = getResourceAsStream("config.yml");
