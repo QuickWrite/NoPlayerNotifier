@@ -1,5 +1,8 @@
 package net.quickwrite.noplayernotifier.listeners;
 
+import dev.aura.bungeechat.api.account.AccountManager;
+import dev.aura.bungeechat.api.enums.ChannelType;
+
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
@@ -43,7 +46,7 @@ public class MessageListener implements Listener {
 
         ProxiedPlayer player = (ProxiedPlayer)event.getSender();
 
-        if(player.hasPermission(BYPASS_PERM)) return;
+        if(player.hasPermission(BYPASS_PERM) || !isLocal(player)) return;
 
         if(ProxyServer.getInstance().getPlayers().size() == 1) {
             player.sendMessage(config.getMessageBungee());
@@ -62,5 +65,9 @@ public class MessageListener implements Listener {
      */
     public void setConfig(Config config) {
         this.config = config;
+    }
+
+    private boolean isLocal(ProxiedPlayer player) {
+        return AccountManager.getAccount(player.getUniqueId()).get().getChannelType() == ChannelType.LOCAL;
     }
 }
