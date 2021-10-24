@@ -39,21 +39,22 @@ public class MessageListener implements Listener {
         if(
                 event.isCommand() ||
                 event.isCancelled() ||
-                !(event.getSender() instanceof ProxiedPlayer) ||
-                config.hasPrefix(event.getMessage())
+                !(event.getSender() instanceof ProxiedPlayer)
         )
             return;
 
         ProxiedPlayer player = (ProxiedPlayer)event.getSender();
 
-        if(player.hasPermission(BYPASS_PERM) || !isLocal(player)) return;
+        if(player.hasPermission(BYPASS_PERM)) return;
 
+        // When the player is alone on the bungee
         if(ProxyServer.getInstance().getPlayers().size() == 1) {
             player.sendMessage(config.getMessageBungee());
             return;
         }
 
-        if(player.getServer().getInfo().getPlayers().size() == 1) {
+        // When the player is alone on the server
+        if(player.getServer().getInfo().getPlayers().size() == 1 && !config.hasPrefix(event.getMessage()) && isLocal(player)) {
             player.sendMessage(config.getMessageServer());
         }
     }
@@ -67,6 +68,12 @@ public class MessageListener implements Listener {
         this.config = config;
     }
 
+    /**
+     * Returns true when the player is in the channel <code>LOCAL</code>.
+     *
+     * @param player The player that is checked.
+     * @return If the player is in the channel <code>LOCAL</code>.
+     */
     private boolean isLocal(ProxiedPlayer player) {
         return AccountManager.getAccount(player.getUniqueId()).get().getChannelType() == ChannelType.LOCAL;
     }
