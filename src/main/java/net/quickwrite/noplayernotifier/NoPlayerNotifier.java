@@ -7,7 +7,7 @@ import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 import net.quickwrite.noplayernotifier.commands.NPNReload;
-import net.quickwrite.noplayernotifier.data.Config;
+import net.quickwrite.noplayernotifier.utils.Config;
 import net.quickwrite.noplayernotifier.listeners.MessageListener;
 
 import java.io.*;

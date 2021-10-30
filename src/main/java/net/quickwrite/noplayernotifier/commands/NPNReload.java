@@ -6,8 +6,9 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
 import net.quickwrite.noplayernotifier.NoPlayerNotifier;
-import net.quickwrite.noplayernotifier.data.Config;
+import net.quickwrite.noplayernotifier.utils.Config;
 import net.quickwrite.noplayernotifier.listeners.MessageListener;
+import net.quickwrite.noplayernotifier.utils.Permission;
 
 import java.util.Collections;
 
@@ -74,6 +75,6 @@ public class NPNReload extends Command implements TabExecutor {
      * @return If the sender has the permission
      */
     public boolean hasPermission(CommandSender sender) {
-        return sender.hasPermission("noplayernotifier.reload");
+        return sender.hasPermission(Permission.RELOAD.toString());
     }
 }

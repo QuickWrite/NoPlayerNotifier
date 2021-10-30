@@ -8,14 +8,14 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
-import net.quickwrite.noplayernotifier.data.Config;
+import net.quickwrite.noplayernotifier.utils.Config;
+import net.quickwrite.noplayernotifier.utils.Permission;
 
 /**
  * @author QuickWrite
  */
 public class MessageListener implements Listener {
     private Config config;
-    private final String BYPASS_PERM = "noplayernotifier.bypass";
 
     /**
      * Checks every message if a player has
@@ -45,7 +45,7 @@ public class MessageListener implements Listener {
 
         ProxiedPlayer player = (ProxiedPlayer)event.getSender();
 
-        if(player.hasPermission(BYPASS_PERM)) return;
+        if(player.hasPermission(Permission.BYPASS.toString())) return;
 
         // When the player is alone on the bungee
         if(ProxyServer.getInstance().getPlayers().size() == 1) {
