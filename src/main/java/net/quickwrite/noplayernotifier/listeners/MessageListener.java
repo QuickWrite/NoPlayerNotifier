@@ -11,6 +11,8 @@ import net.md_5.bungee.event.EventHandler;
 import net.quickwrite.noplayernotifier.utils.Config;
 import net.quickwrite.noplayernotifier.utils.Permission;
 
+import java.util.Objects;
+
 /**
  * @author QuickWrite
  */
@@ -36,16 +38,16 @@ public class MessageListener implements Listener {
      */
     @EventHandler
     public void onPlayerChat(ChatEvent event) {
-        if(
-                event.isCommand() ||
-                event.isCancelled() ||
-                !(event.getSender() instanceof ProxiedPlayer)
-        )
-            return;
+        if(!(event.getSender() instanceof ProxiedPlayer)) return;
 
         ProxiedPlayer player = (ProxiedPlayer)event.getSender();
 
-        if(player.hasPermission(Permission.BYPASS.toString())) return;
+        if(
+                event.isCommand() ||
+                event.isCancelled() ||
+                player.hasPermission(Permission.BYPASS.toString())
+        )
+            return;
 
         // When the player is alone on the bungee
         if(ProxyServer.getInstance().getPlayers().size() == 1) {
@@ -54,7 +56,7 @@ public class MessageListener implements Listener {
         }
 
         // When the player is alone on the server
-        if(player.getServer().getInfo().getPlayers().size() == 1 && !config.hasPrefix(event.getMessage()) && isLocal(player)) {
+        if(player.getServer().getInfo().getPlayers().size() == 1 && !config.hasPrefix(event.getMessage()) && getChannelType(player) == ChannelType.LOCAL) {
             player.sendMessage(config.getMessageServer());
         }
     }
@@ -69,12 +71,12 @@ public class MessageListener implements Listener {
     }
 
     /**
-     * Returns true when the player is in the channel <code>LOCAL</code>.
+     * Returns the channel type of the player
      *
-     * @param player The player that is checked.
-     * @return If the player is in the channel <code>LOCAL</code>.
+     * @param player The player object
+     * @return The channel type
      */
-    private boolean isLocal(ProxiedPlayer player) {
-        return AccountManager.getAccount(player.getUniqueId()).get().getChannelType() == ChannelType.LOCAL;
+    private ChannelType getChannelType(ProxiedPlayer player) {
+        return Objects.requireNonNull(AccountManager.getAccount(player.getUniqueId()).orElse(null)).getChannelType();
     }
 }

@@ -24,14 +24,21 @@ public class Config {
      * @param messageServer The message when nobody is on the same server
      * @param messageBungee The message when nobody is on the same bungee
      */
-    public Config(String prefix, String msgPrefix, List<String> messageServer, List<String> messageBungee) {
+    public Config(String prefix,
+                  String msgPrefix,
+                  List<String> messageServer,
+                  List<String> messageBungee) {
         if(!prefix.equals(""))
             this.prefix = prefix;
         else
             this.prefix = null;
 
-        this.messageServer = new TextComponent(format(msgPrefix + concatenateStrings(messageServer)));
-        this.messageBungee = new TextComponent(format(msgPrefix + concatenateStrings(messageBungee)));
+        this.messageServer = createTextComponent(msgPrefix, messageServer);
+        this.messageBungee = createTextComponent(msgPrefix, messageBungee);
+    }
+
+    private TextComponent createTextComponent(String prefix, List<String> text) {
+        return new TextComponent(format(concatenateStrings(prefix, text)));
     }
 
     /**
@@ -42,8 +49,8 @@ public class Config {
      * @param messages The List of strings
      * @return The concatenated string
      */
-    private String concatenateStrings(List<String> messages) {
-        return String.join("\n", messages);
+    private String concatenateStrings(String prefix, List<String> messages) {
+        return prefix + String.join("\n", messages);
     }
 
     /**
@@ -68,6 +75,10 @@ public class Config {
         if(this.prefix == null) return false;
 
         return message.startsWith(this.prefix);
+    }
+
+    public TextComponent getMessageHelp() {
+        return this.messageHelp;
     }
 
     /**
