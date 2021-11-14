@@ -77,10 +77,6 @@ public class Config {
         return message.startsWith(this.prefix);
     }
 
-    public TextComponent getMessageHelp() {
-        return this.messageHelp;
-    }
-
     /**
      * Returns the message for the
      * NoPlayerServer event as a
