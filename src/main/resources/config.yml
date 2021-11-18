@@ -27,3 +27,19 @@ msg_nobody_online_server:
 # the whole bungee server network.
 msg_nobody_online_bungee:
   - "Currently nobody on this server is online!"
+
+# The different commands where messages are send to the player
+# commands.<commandname> is the command name itself
+# The permission is the permission that a player on the bungee must
+# have so that the message itself does not get send.
+#
+# So when a player sends a the command <test> and nobody on the bungee
+# has the permission <mypermission.permission> the message will be
+# send, but when there is a player on the bungee with this permission
+# the message won't be send.
+commands:
+  test:
+    permission: "mypermission.permission"
+    message:
+      - "&bCurrently nobody is online that has the"
+      - "  &3mypermission.permission&r permission"
