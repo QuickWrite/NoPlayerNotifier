@@ -58,11 +58,10 @@ public class MessageListener implements Listener {
 
             if(command == null) return;
 
-            long players = ProxyServer.getInstance().getPlayers().stream()
-                    .filter(serverPlayer -> serverPlayer.hasPermission(command.getPermission()))
-                    .count();
+            boolean playerExists = ProxyServer.getInstance().getPlayers().stream()
+                    .anyMatch(command::hasPermission);
 
-            if (players == 0)
+            if (!playerExists)
                 player.sendMessage(command.getMessage());
 
             return;

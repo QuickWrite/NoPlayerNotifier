@@ -1,6 +1,7 @@
 package net.quickwrite.noplayernotifier.utils;
 
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +57,8 @@ public class CommandList {
         }
 
         /**
-         * Gets the message
+         * Gets the return message if the player is on the server
+         * without any other player that has the permission.
          *
          * @return The message
          */
@@ -65,12 +67,29 @@ public class CommandList {
         }
 
         /**
-         * Gets the permission
+         * Gets the permission that is needed for a player to have
+         * so that the message does not get send.
          *
          * @return The permission
          */
         public String getPermission() {
             return this.permission;
+        }
+
+        /**
+         * Returns true if the player has the permission that
+         * is required with the specific command.
+         *
+         * If the command does not have the permission it returns true
+         *
+         * @param player The player that is checked
+         * @return If the player has the permission
+         */
+        public boolean hasPermission(ProxiedPlayer player) {
+            if (this.permission == null)
+                return true;
+
+            return player.hasPermission(this.permission);
         }
     }
 }
