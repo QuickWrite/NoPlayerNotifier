@@ -4,6 +4,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.config.Configuration;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -47,14 +48,44 @@ public class Config {
         Collection<String> collection = commands.getKeys();
 
         for (String command : collection) {
+            TextComponent message = createTextComponent(commands.getStringList(command + ".message"));
+
+            String permission = commands.getString(command + ".permission");
+
+            List<String> commandList = new ArrayList<>();
+            commandList.add(command);
+            commandList.addAll(commands.getStringList(command + ".aliases"));
+
+            addCommand(commandList, message, permission);
+        }
+    }
+
+    /**
+     * Adds a command with their aliases so that it
+     * can be used in the HashMap
+     *
+     * @param commands The different commands. The aliases are treated the same as the main command
+     *                 so that they can be checked as well as the main command
+     * @param message The message that should be send to the player
+     * @param permission The permission that should be checked
+     */
+    private void addCommand(List<String> commands, TextComponent message, String permission) {
+        for(String command : commands) {
             commandList.addCommand(
                     command,
-                    createTextComponent(commands.getStringList(command + ".message")),
-                    commands.getString(command + ".permission")
+                    message,
+                    permission
             );
         }
     }
 
+    /**
+     * Creates a TextComponent from a list of strings with
+     * color codes
+     *
+     * @param text The list of lines of test
+     * @return The TextComponent
+     */
     private TextComponent createTextComponent(List<String> text) {
         return new TextComponent(format(concatenateStrings(msgPrefix, text)));
     }

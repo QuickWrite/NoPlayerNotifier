@@ -32,6 +32,8 @@ msg_nobody_online_bungee:
 # commands.<commandname> is the command name itself
 # The permission is the permission that a player on the bungee must
 # have so that the message itself does not get send.
+# The aliases are the different names for the command, except
+# the main name.
 #
 # So when a player sends a the command <test> and nobody on the bungee
 # has the permission <mypermission.permission> the message will be
@@ -40,6 +42,8 @@ msg_nobody_online_bungee:
 commands:
   test:
     permission: "mypermission.permission"
+    aliases:
+      - "testhere"
     message:
       - "&bCurrently nobody is online that has the"
       - "  &3mypermission.permission&r permission"
