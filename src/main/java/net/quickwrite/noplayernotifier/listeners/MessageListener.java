@@ -28,7 +28,7 @@ public class MessageListener implements Listener {
      *
      * @param config The messages that are saved in the config
      */
-    public MessageListener(Config config) {
+    public MessageListener(final Config config) {
         this.config = config;
     }
 
@@ -38,7 +38,7 @@ public class MessageListener implements Listener {
      * @param event The message event itself
      */
     @EventHandler
-    public void onPlayerChat(ChatEvent event) {
+    public void onPlayerChat(final ChatEvent event) {
         if(!(event.getSender() instanceof ProxiedPlayer)) return;
 
         ProxiedPlayer player = (ProxiedPlayer)event.getSender();
@@ -84,7 +84,7 @@ public class MessageListener implements Listener {
      *
      * @param config The config class
      */
-    public void setConfig(Config config) {
+    public void setConfig(final Config config) {
         this.config = config;
     }
 
@@ -94,7 +94,7 @@ public class MessageListener implements Listener {
      * @param player The player object
      * @return The channel type
      */
-    private ChannelType getChannelType(ProxiedPlayer player) {
+    private ChannelType getChannelType(final ProxiedPlayer player) {
         return Objects.requireNonNull(AccountManager.getAccount(player.getUniqueId()).orElse(null)).getChannelType();
     }
 }

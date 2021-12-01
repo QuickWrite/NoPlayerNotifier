@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author QuickWrite
  */
-public class Config {
+public final class Config {
     private final String prefix;
     private final String msgPrefix;
     private final TextComponent messageServer;
@@ -30,11 +30,11 @@ public class Config {
      * @param messageBungee The message when nobody is on the same bungee
      * @param commands The commands that should be included
      */
-    public Config(String prefix,
-                  String msgPrefix,
-                  List<String> messageServer,
-                  List<String> messageBungee,
-                  Configuration commands) {
+    public Config(final String prefix,
+                  final String msgPrefix,
+                  final List<String> messageServer,
+                  final List<String> messageBungee,
+                  final Configuration commands) {
         if(!prefix.equals(""))
             this.prefix = prefix;
         else
@@ -45,7 +45,7 @@ public class Config {
         this.messageServer = createTextComponent(messageServer);
         this.messageBungee = createTextComponent(messageBungee);
 
-        Collection<String> collection = commands.getKeys();
+        final Collection<String> collection = commands.getKeys();
 
         for (String command : collection) {
             TextComponent message = createTextComponent(commands.getStringList(command + ".message"));

@@ -11,7 +11,12 @@ import java.util.Map;
  *
  * @author QuickWrite
  */
-public class CommandList {
+public final class CommandList {
+    /**
+     * The HashMap where all of the different commands and their
+     * messages that can be accessed to check if the command
+     * should be included and what message should be send.
+     */
     private final Map<String, Command> commands = new HashMap<>();
 
     /**
@@ -22,7 +27,7 @@ public class CommandList {
      * @param message The message that should be send to the player
      * @param permission The permission that should be checked
      */
-    public void addCommand(String command, TextComponent message, String permission) {
+    public void addCommand(final String command, final TextComponent message, final String permission) {
         commands.put(command, new Command(message, permission));
     }
 
@@ -34,7 +39,7 @@ public class CommandList {
      * @param command The command
      * @return The message that should be send
      */
-    public Command getMessage(String command) {
+    public Command getMessage(final String command) {
         return commands.get(command);
     }
 
@@ -51,7 +56,7 @@ public class CommandList {
          * @param message The message of the command
          * @param permission The permission of the command
          */
-        protected Command(TextComponent message, String permission) {
+        protected Command(final TextComponent message, final String permission) {
             this.message = message;
             this.permission = permission;
         }
@@ -85,7 +90,7 @@ public class CommandList {
          * @param player The player that is checked
          * @return If the player has the permission
          */
-        public boolean hasPermission(ProxiedPlayer player) {
+        public boolean hasPermission(final ProxiedPlayer player) {
             if (this.permission == null)
                 return true;
 

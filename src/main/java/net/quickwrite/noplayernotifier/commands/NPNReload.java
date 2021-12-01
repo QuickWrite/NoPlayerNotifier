@@ -15,7 +15,7 @@ import java.util.Collections;
 /**
  * @author QuickWrite
  */
-public class NPNReload extends Command implements TabExecutor {
+public final class NPNReload extends Command implements TabExecutor {
     private final MessageListener messageListener;
     private final NoPlayerNotifier noPlayerNotifier;
 
@@ -27,7 +27,7 @@ public class NPNReload extends Command implements TabExecutor {
      * @param noPlayerNotifier The instance of the main class
      * @param messageListener The message listener that gets all of the messages
      */
-    public NPNReload(NoPlayerNotifier noPlayerNotifier, MessageListener messageListener) {
+    public NPNReload(final NoPlayerNotifier noPlayerNotifier, final MessageListener messageListener) {
         super("npnreload");
 
         this.noPlayerNotifier = noPlayerNotifier;
@@ -41,7 +41,7 @@ public class NPNReload extends Command implements TabExecutor {
      * @param args The arguments the command has
      */
     @Override
-    public void execute(CommandSender sender, String[] args) {
+    public void execute(final CommandSender sender, final String[] args) {
         if(!hasPermission(sender)) {
             sender.sendMessage(new TextComponent(ChatColor.RED + "I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is a mistake."));
             return;
@@ -61,7 +61,7 @@ public class NPNReload extends Command implements TabExecutor {
      * @return An empty list when sender has permissions
      */
     @Override
-    public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
+    public final Iterable<String> onTabComplete(final CommandSender sender, final String[] args) {
         if(!hasPermission(sender)) return null;
 
         return Collections.emptyList();
@@ -74,7 +74,7 @@ public class NPNReload extends Command implements TabExecutor {
      * @param sender The sender of the command
      * @return If the sender has the permission
      */
-    public boolean hasPermission(CommandSender sender) {
+    public boolean hasPermission(final CommandSender sender) {
         return sender.hasPermission(Permission.RELOAD.toString());
     }
 }
