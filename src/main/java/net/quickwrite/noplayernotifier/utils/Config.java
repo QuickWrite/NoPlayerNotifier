@@ -114,19 +114,6 @@ public final class Config {
     }
 
     /**
-     * Returns if the message starts with the
-     * prefix that is specified in the config
-     *
-     * @param message The message that is checked
-     * @return If the message starts with the prefix
-     */
-    public boolean hasPrefix(String message) {
-        if(this.prefix == null) return false;
-
-        return message.startsWith(this.prefix);
-    }
-
-    /**
      * Returns the message for the
      * NoPlayerServer event as a
      * TextComponent
@@ -172,5 +159,9 @@ public final class Config {
                 configuration.getStringList("msg_nobody_online_bungee"),
                 configuration.getSection("commands")
         );
+    }
+
+    public String getPrefix() {
+        return prefix;
     }
 }

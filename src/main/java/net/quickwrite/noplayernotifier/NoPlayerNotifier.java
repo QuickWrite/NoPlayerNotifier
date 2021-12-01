@@ -9,6 +9,8 @@ import net.md_5.bungee.config.YamlConfiguration;
 import net.quickwrite.noplayernotifier.commands.NPNReload;
 import net.quickwrite.noplayernotifier.utils.Config;
 import net.quickwrite.noplayernotifier.listeners.MessageListener;
+import net.quickwrite.noplayernotifier.utils.channel.ChannelTypeBungeeChat;
+import net.quickwrite.noplayernotifier.utils.channel.ChannelTypeChat;
 
 import java.io.*;
 
@@ -24,7 +26,8 @@ public final class NoPlayerNotifier extends Plugin {
 
         PluginManager pluginManager = this.getProxy().getPluginManager();
 
-        MessageListener messageListener = new MessageListener(config);
+        MessageListener messageListener = new MessageListener(config,
+                pluginExists("BungeeChat") ? new ChannelTypeBungeeChat() : new ChannelTypeChat());
 
         pluginManager.registerCommand(this, new NPNReload(this, messageListener));
         pluginManager.registerListener(this, messageListener);
@@ -33,6 +36,17 @@ public final class NoPlayerNotifier extends Plugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    /**
+     * Checks if a plugin with that name exists on the
+     * proxy server.
+     *
+     * @param pluginName The name of the plugin
+     * @return If the plugin exists.
+     */
+    private boolean pluginExists(final String pluginName) {
+        return getProxy().getPluginManager().getPlugin(pluginName) != null;
     }
 
     /**

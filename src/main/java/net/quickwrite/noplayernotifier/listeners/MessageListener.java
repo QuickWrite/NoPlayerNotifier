@@ -1,8 +1,5 @@
 package net.quickwrite.noplayernotifier.listeners;
 
-import dev.aura.bungeechat.api.account.AccountManager;
-import dev.aura.bungeechat.api.enums.ChannelType;
-
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
@@ -11,14 +8,14 @@ import net.md_5.bungee.event.EventHandler;
 import net.quickwrite.noplayernotifier.utils.CommandList;
 import net.quickwrite.noplayernotifier.utils.Config;
 import net.quickwrite.noplayernotifier.utils.Permission;
-
-import java.util.Objects;
+import net.quickwrite.noplayernotifier.utils.channel.ChannelType;
 
 /**
  * @author QuickWrite
  */
 public class MessageListener implements Listener {
     private Config config;
+    private ChannelType channelType;
 
     /**
      * Checks every message if a player has
@@ -28,8 +25,9 @@ public class MessageListener implements Listener {
      *
      * @param config The messages that are saved in the config
      */
-    public MessageListener(final Config config) {
+    public MessageListener(final Config config, final ChannelType channelType) {
         this.config = config;
+        this.channelType = channelType;
     }
 
     /**
@@ -74,7 +72,7 @@ public class MessageListener implements Listener {
         }
 
         // When the player is alone on the server
-        if(player.getServer().getInfo().getPlayers().size() == 1 && !config.hasPrefix(event.getMessage()) && getChannelType(player) == ChannelType.LOCAL) {
+        if(player.getServer().getInfo().getPlayers().size() == 1 && channelType.isLocal(event, config.getPrefix())) {
             player.sendMessage(config.getMessageServer());
         }
     }
@@ -86,15 +84,5 @@ public class MessageListener implements Listener {
      */
     public void setConfig(final Config config) {
         this.config = config;
-    }
-
-    /**
-     * Returns the channel type of the player
-     *
-     * @param player The player object
-     * @return The channel type
-     */
-    private ChannelType getChannelType(final ProxiedPlayer player) {
-        return Objects.requireNonNull(AccountManager.getAccount(player.getUniqueId()).orElse(null)).getChannelType();
     }
 }
