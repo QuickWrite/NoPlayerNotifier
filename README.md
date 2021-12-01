@@ -1,7 +1,7 @@
 # NoPlayerNotifier
  A simple BungeeCord/Waterfall plugin that allows the server to notify a player when they are talking to themselves.
 
-Info: `BungeeChat` is needed as a plugin for the plugin to work.
+Info: `BungeeChat` is not needed, but recommended.
 
 ## How does it work?
 When a player sends a message the plugin checks if only one player is on the bungee or the server and sends a message if one of these is true. These two messages are different in the config with the tags
