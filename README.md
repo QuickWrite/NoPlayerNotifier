@@ -19,7 +19,7 @@ When a message starts with the `prefix` no message will be sent.
 
 When a player has the `noplayernotifier.bypass` permission no message will be sent.
 
-When you found out that you made a mistake in the `config.yml` you can just use the `/npnreload` command and the plugin reloads the config. The player needs to have the `noplayernotifier.reload` permission on the Bungee.
+When you found out that you made a mistake in the `config.yml` you can just use the `/npnreload` command, and the plugin reloads the config. The player needs to have the `noplayernotifier.reload` permission on the Bungee.
 
 ## Why is it useful?
 It can be used to explain the chat system the server uses as not everyone understands the idea that every server has a different chat. This can be a common problem on BungeeCord/ Waterfall servers as many servers need to be connected, and the chat should be as clean as possible.
