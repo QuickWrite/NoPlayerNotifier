@@ -2,7 +2,7 @@ package net.quickwrite.noplayernotifier.utils.channel;
 
 import net.md_5.bungee.api.event.ChatEvent;
 
-public final class ChannelTypeChat implements ChannelType {
+public final class ChannelTypeChat extends ChannelType {
     /**
      * Checks if the message is send in the local chat
      * or if the message is send in a different chat.

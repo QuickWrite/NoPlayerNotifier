@@ -6,7 +6,7 @@ import net.md_5.bungee.api.event.ChatEvent;
 
 import java.util.Objects;
 
-public final class ChannelTypeBungeeChat implements ChannelType {
+public final class ChannelTypeBungeeChat extends ChannelType {
     /**
      * Checks if the message is send in the local chat
      * or if the message is send in a different chat.

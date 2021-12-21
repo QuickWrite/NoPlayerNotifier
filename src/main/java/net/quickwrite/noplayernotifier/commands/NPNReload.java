@@ -35,7 +35,9 @@ public final class NPNReload extends Command implements TabExecutor {
     }
 
     /**
-     * Executes the command <code>/npnreload</code>
+     * Executes when a player sends the command
+     * <code>/npnreload</code> in chat or the
+     * console is sending <code>npnreload</code>
      *
      * @param sender The sender of the command
      * @param args The arguments the command has

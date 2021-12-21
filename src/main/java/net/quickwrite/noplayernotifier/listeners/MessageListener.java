@@ -15,7 +15,7 @@ import net.quickwrite.noplayernotifier.utils.channel.ChannelType;
  */
 public class MessageListener implements Listener {
     private Config config;
-    private ChannelType channelType;
+    private final ChannelType channelType;
 
     /**
      * Checks every message if a player has
@@ -32,6 +32,8 @@ public class MessageListener implements Listener {
 
     /**
      * When the player sends a message
+     * this event gets called and it is getting
+     * checked if a message should be send.
      *
      * @param event The message event itself
      */
@@ -78,7 +80,7 @@ public class MessageListener implements Listener {
     }
 
     /**
-     * Sets the config attribute
+     * Sets the config attribute in the class
      *
      * @param config The config class
      */

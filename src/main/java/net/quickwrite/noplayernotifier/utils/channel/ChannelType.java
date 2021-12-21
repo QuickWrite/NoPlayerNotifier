@@ -2,7 +2,7 @@ package net.quickwrite.noplayernotifier.utils.channel;
 
 import net.md_5.bungee.api.event.ChatEvent;
 
-public interface ChannelType {
+public abstract class ChannelType {
     /**
      * Checks if the message is send in the local chat
      * or if the message is send in a different chat.
@@ -11,7 +11,7 @@ public interface ChannelType {
      * @param prefix The prefix that is stored in the config
      * @return If the message is send in the local chat
      */
-    boolean isLocal(final ChatEvent event, final String prefix);
+    public abstract boolean isLocal(final ChatEvent event, final String prefix);
 
     /**
      * Returns if the message starts with the
@@ -21,7 +21,7 @@ public interface ChannelType {
      * @param prefix The prefix that is checked against
      * @return If the message starts with the prefix
      */
-    default boolean hasPrefix(String message, String prefix) {
+     protected boolean hasPrefix(String message, String prefix) {
         if(prefix == null) return true;
 
         return message.startsWith(prefix);
