@@ -6,7 +6,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
 import net.quickwrite.noplayernotifier.NoPlayerNotifier;
-import net.quickwrite.noplayernotifier.utils.Config;
+import net.quickwrite.noplayernotifier.utils.config.Config;
 import net.quickwrite.noplayernotifier.listeners.MessageListener;
 import net.quickwrite.noplayernotifier.utils.Permission;
 

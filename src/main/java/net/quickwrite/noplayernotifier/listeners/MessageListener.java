@@ -5,8 +5,8 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
-import net.quickwrite.noplayernotifier.utils.CommandList;
-import net.quickwrite.noplayernotifier.utils.Config;
+import net.quickwrite.noplayernotifier.utils.config.CommandList;
+import net.quickwrite.noplayernotifier.utils.config.Config;
 import net.quickwrite.noplayernotifier.utils.Permission;
 import net.quickwrite.noplayernotifier.utils.channel.ChannelType;
 

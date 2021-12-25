@@ -1,4 +1,4 @@
-package net.quickwrite.noplayernotifier.utils;
+package net.quickwrite.noplayernotifier.utils.config;
 
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
