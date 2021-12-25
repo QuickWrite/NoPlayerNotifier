@@ -1,8 +1,8 @@
 package net.quickwrite.noplayernotifier.utils.config;
 
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.config.Configuration;
+import net.quickwrite.noplayernotifier.utils.format.MessageFormatter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -87,7 +87,7 @@ public final class Config {
      * @return The TextComponent
      */
     private TextComponent createTextComponent(List<String> text) {
-        return new TextComponent(format(concatenateStrings(msgPrefix, text)));
+        return new TextComponent(MessageFormatter.format(concatenateStrings(msgPrefix, text)));
     }
 
     /**
@@ -100,17 +100,6 @@ public final class Config {
      */
     private String concatenateStrings(String prefix, List<String> messages) {
         return prefix + String.join("\n", messages);
-    }
-
-    /**
-     * Formats the message by translating the
-     * colorcodes with an '&'
-     *
-     * @param string The message that should be translated.
-     * @return The translated message.
-     */
-    private String format(String string) {
-        return ChatColor.translateAlternateColorCodes('&', string);
     }
 
     /**
