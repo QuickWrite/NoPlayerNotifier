@@ -2,6 +2,7 @@ package net.quickwrite.noplayernotifier.utils.format;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.quickwrite.noplayernotifier.utils.Pair;
 
 import java.awt.*;
 
@@ -31,59 +32,67 @@ public class MessageIterator {
 
         TextComponent component = new TextComponent();
         component.setColor(currentColor);
+        component = attributes.addAttributes(component);
 
         char character;
+        int back = 0;
 
         while(inBounds()) {
             character = getNext();
 
-            if(character == identifier && getNextCode()) {
+            if(character == identifier) {
+                back = getNextCode();
+
                 break;
             }
         }
 
-        component.setText(message.substring(start, iterator));
+        component.setText(message.substring(start, iterator - back));
 
         return component;
     }
 
-    private boolean getNextCode() {
+    private int getNextCode() {
         if (!inBounds())
-            return false;
+            return 0;
 
         char character = getNext();
 
         if(HEX_IDENTIFIER == character) {
-            final ChatColor buffer = getHex();
+            final Pair<ChatColor, Integer> buffer = getHex();
 
             if(buffer == null)
-                return false;
+                return 0;
 
-            currentColor = buffer;
-            return true;
+            currentColor = buffer.getValue1();
+
+            return buffer.getValue2();
         }
 
         if (Character.toLowerCase(character) == RESET_IDENTIFIER) {
             currentColor = getResetColor();
             attributes.reset();
 
-            return true;
+            return 1;
         }
 
         if(contains(COLOR_CHARS, character)) {
             currentColor = ChatColor.getByChar(character);
 
-            return true;
+            return 1;
         } else if(contains(ATTRIBUTE_CHARS, character)) {
             attributes.set(character);
 
-            return true;
+            return 1;
         }
 
-        return false;
+        return 0;
     }
 
-    private ChatColor getHex() {
+    private Pair<ChatColor, Integer> getHex() {
+        if(!inBounds())
+            return null;
+
         int start = iterator + 1;
         char character;
 
@@ -100,7 +109,7 @@ public class MessageIterator {
         try {
             Color color = Color.decode("#" + message.substring(start, iterator));
 
-            return ChatColor.of(color);
+            return new Pair<>(ChatColor.of(color), iterator - start + 2);
         } catch (NumberFormatException
                 | StringIndexOutOfBoundsException exception) {
             return null;
@@ -120,7 +129,7 @@ public class MessageIterator {
         return ChatColor.of(Color.WHITE);
     }
 
-    private boolean contains(String list,char character) {
+    private boolean contains(String list, char character) {
         return list.contains(Character.toLowerCase(character) + "");
     }
 
@@ -157,7 +166,6 @@ public class MessageIterator {
                     return;
                 case 'k':
                     isObfuscated = true;
-                    return;
             }
         }
 
