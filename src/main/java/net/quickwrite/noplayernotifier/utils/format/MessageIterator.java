@@ -15,6 +15,7 @@ public class MessageIterator {
     private static final String ATTRIBUTE_CHARS = "klmno";
     private static final char RESET_IDENTIFIER = 'r';
     private static final char HEX_IDENTIFIER = '#';
+    private static final char DELIMITER = ';';
 
     private ChatColor currentColor = getResetColor();
     private final Attributes attributes = new Attributes();
@@ -95,9 +96,15 @@ public class MessageIterator {
 
         int start = iterator + 1;
         char character;
+        boolean delimiter = false;
 
         while(inBounds()) {
             character = getNext();
+
+            if(character == DELIMITER) {
+                delimiter = true;
+                break;
+            }
 
             if (!contains(COLOR_CHARS, character)) {
                 iterator--;
@@ -107,7 +114,7 @@ public class MessageIterator {
         }
 
         try {
-            Color color = Color.decode("#" + message.substring(start, iterator));
+            Color color = Color.decode("#" + message.substring(start, iterator + (delimiter ? 0 : 1) ));
 
             return new Pair<>(ChatColor.of(color), iterator - start + 2);
         } catch (NumberFormatException
