@@ -6,6 +6,12 @@ import net.quickwrite.noplayernotifier.utils.Pair;
 
 import java.awt.*;
 
+/**
+ * An iterator to format the messages with
+ * hexadecimal color codes.
+ *
+ * @author QuickWrite
+ */
 public class MessageIterator {
     private final String message;
     private int iterator = -1;
@@ -20,11 +26,24 @@ public class MessageIterator {
     private ChatColor currentColor = getResetColor();
     private final Attributes attributes = new Attributes();
 
+    /**
+     * Initializes the message iterator with the
+     * respective values.
+     *
+     * @param message The message that should be iterated over.
+     * @param identifier The iterator that should be used by the iterator
+     */
     public MessageIterator(final String message, char identifier) {
         this.message = message + "-";
         this.identifier = identifier;
     }
 
+    /**
+     * Gets the TextComponent that has the formatted
+     * message to the next code.
+     *
+     * @return A formatted TextComponent
+     */
     public TextComponent toNext() {
         if(!inBounds())
             return null;
@@ -53,6 +72,11 @@ public class MessageIterator {
         return component;
     }
 
+    /**
+     * Checks if a code is valid.
+     *
+     * @return the number of steps that should be backtracked.
+     */
     private int getNextCode() {
         if (!inBounds())
             return 0;
@@ -90,6 +114,12 @@ public class MessageIterator {
         return 0;
     }
 
+    /**
+     * Gets the hex color code
+     *
+     * @return the ChatColor with the color code and the number
+     *         of steps that should be backtracked.
+     */
     private Pair<ChatColor, Integer> getHex() {
         if(!inBounds())
             return null;
@@ -123,23 +153,49 @@ public class MessageIterator {
         }
     }
 
+    /**
+     * Checks if the iterator is in bounds.
+     *
+     * @return if the iterator is in bounds
+     */
     private boolean inBounds() {
         return message.length() > (iterator + 1);
     }
 
+    /**
+     * Returns the next character.
+     *
+     * @return the next character
+     */
     private char getNext() {
         iterator++;
         return message.charAt(iterator);
     }
 
+    /**
+     * Returns the color that is the default
+     * color of the message.
+     *
+     * @return the default ChatColor
+     */
     private ChatColor getResetColor() {
         return ChatColor.of(Color.WHITE);
     }
 
+    /**
+     * Checks if a character is in a String.
+     *
+     * @param list The String that should be checked.
+     * @param character The char that should be in the String
+     * @return If the char is in the String
+     */
     private boolean contains(String list, char character) {
         return list.contains(Character.toLowerCase(character) + "");
     }
 
+    /**
+     * Stores the attributes of a message
+     */
     private static class Attributes {
         private boolean isBold = false;
         private boolean isItalic = false;
@@ -147,6 +203,12 @@ public class MessageIterator {
         private boolean isStrikethrough = false;
         private boolean isObfuscated = false;
 
+        /**
+         * Adds the attributes to the TextComponent
+         *
+         * @param component The TextComponent
+         * @return The TextComponent
+         */
         public TextComponent addAttributes(final TextComponent component) {
             component.setBold(isBold);
             component.setItalic(isItalic);
@@ -157,6 +219,11 @@ public class MessageIterator {
             return component;
         }
 
+        /**
+         * Sets the attribute inside the object
+         *
+         * @param character The character that is the attribute.
+         */
         public void set(final char character) {
             switch (character) {
                 case 'l':
@@ -176,6 +243,9 @@ public class MessageIterator {
             }
         }
 
+        /**
+         * Resets all of the attributes
+         */
         public void reset() {
             isBold = false;
             isItalic = false;
