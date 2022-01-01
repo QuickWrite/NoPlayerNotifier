@@ -30,6 +30,20 @@ public class MessageIterator {
      * Initializes the message iterator with the
      * respective values.
      *
+     * <br><br>
+     *
+     * Sets the identifier to the value <code>&</code>.
+     *
+     * @param message The message that should be iterated over.
+     */
+    public MessageIterator(final String message) {
+        this(message, '&');
+    }
+
+    /**
+     * Initializes the message iterator with the
+     * respective values.
+     *
      * @param message The message that should be iterated over.
      * @param identifier The iterator that should be used by the iterator
      */
@@ -52,7 +66,7 @@ public class MessageIterator {
 
         TextComponent component = new TextComponent();
         component.setColor(currentColor);
-        component = attributes.addAttributes(component);
+        attributes.addAttributes(component);
 
         char character;
         int back = 0;
@@ -209,14 +223,12 @@ public class MessageIterator {
          * @param component The TextComponent
          * @return The TextComponent
          */
-        public TextComponent addAttributes(final TextComponent component) {
+        public void addAttributes(TextComponent component) {
             component.setBold(isBold);
             component.setItalic(isItalic);
             component.setUnderlined(isUnderlined);
             component.setStrikethrough(isStrikethrough);
             component.setObfuscated(isObfuscated);
-
-            return component;
         }
 
         /**

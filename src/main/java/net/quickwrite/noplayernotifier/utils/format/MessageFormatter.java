@@ -71,7 +71,7 @@ public final class MessageFormatter {
      * @return An array of TextComponents that resemble the message
      */
     public static TextComponent[] format(String message) {
-        MessageIterator messageIterator = new MessageIterator(message, '&');
+        MessageIterator messageIterator = new MessageIterator(message);
 
         List<TextComponent> textComponentList = new ArrayList<>();
 
