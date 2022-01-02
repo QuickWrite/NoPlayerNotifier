@@ -4,19 +4,8 @@ package net.quickwrite.noplayernotifier.utils;
  * @author QuickWrite
  */
 public enum Permission {
-    RELOAD ("reload"),
-    BYPASS ("bypass");
-
-    private final String value;
-
-    /**
-     * The permissions for the plugin
-     *
-     * @param value The permission itself
-     */
-    Permission(final String value) {
-        this.value = value;
-    }
+    RELOAD,
+    BYPASS;
 
     /**
      * Returns a String variant of the permission
@@ -25,6 +14,6 @@ public enum Permission {
      * @return The whole permission
      */
     public String toString() {
-        return "noplayernotifier." + value;
+        return "noplayernotifier." + super.toString().toLowerCase();
     }
 }
