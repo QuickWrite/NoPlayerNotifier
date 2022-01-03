@@ -18,7 +18,7 @@ public enum Permission {
 
     /**
      * Returns a String variant of the permission
-     * with a {@code noplayernotifier.} in front
+     * with {@code noplayernotifier.} in front.
      *
      * @return The whole permission
      */
