@@ -125,9 +125,9 @@ public final class Config {
     }
 
     /**
-     * Returns the message for a command and <code>null</code> if it does not exist.
+     * Returns the message for a command and {@code null} if it does not exist.
      *
-     * @param command The command itself (<code>/</code> not included)
+     * @param command The command itself ({@code /} not included)
      * @return A TextComponent that has the message that should be send to the player
      */
     public CommandList.Command getCommand(String command) {
@@ -150,6 +150,11 @@ public final class Config {
         );
     }
 
+    /**
+     * Returns the prefix stored in the config
+     *
+     * @return The prefix
+     */
     public String getPrefix() {
         return prefix;
     }

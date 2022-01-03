@@ -13,59 +13,66 @@ import java.util.List;
 public final class MessageFormatter {
 
     /**
-     * Formats the message with color codes
-     * and custom hex codes. <br>
+     * <p>Formats the message with color codes
+     * and custom hex codes.</p>
      *
-     * All of the color codes are case-insensitive. <br><br>
+     * <p>All of the color codes are case-insensitive.</p>
      *
-     * The color codes from <code>1</code>-<code>f</code> can
-     * be used with an <code>&</code>.
+     * <p>The color codes from {@code 1}-{@code f} can
+     * be used with an {@code &}.
      * They behave exactly like the color codes
-     * Minecraft itself gives with the <code>§</code>. <br><br>
+     * Minecraft itself gives with the {@code §}. </p>
      *
-     * Also the attributes that make the message
-     * bold (<code>l</code>), italic (<code>o</code>),
-     * underlined (<code>n</code>), strikethrough (<code>m</code>)
+     * <p>Also the attributes that make the message
+     * bold ({@code l}), italic ({@code o}),
+     * underlined ({@code n}), strikethrough ({@code m})
      * can be used. These stack on top of each other
      * which means that a single segment can use
-     * multiple attributes: <code>&m&lmessage</code> <br><br>
+     * multiple attributes: {@code &m&lmessage}</p>
      *
-     * To reset all of the styles the code <code>r</code>
-     * can be used. <br>
+     * <p>To reset all of the styles the code {@code r}
+     * can be used.</p>
      *
-     * So a message with the standard Minecraft color codes
-     * would look like this: <br><br>
+     * <p>So a message with the standard Minecraft color codes
+     * would look like this:</p> <br>
      *
-     * <code>&4&lThis&r is a &1simple&r &8&nexamp&lle &4message</code>
+     * <pre>
+     *     {@code &4&lThis&r is a &1simple&r &8&nexamp&lle &4message}
+     * </pre>
      *
-     * <br><br>
+     * <br>
+     *
      * <!-- Separate the two parts -->
      * <hr>
+     * <br>
      *
-     * To use Hexadecimal colors the message must contain
-     * the identifier (which is <code>&</code>) and a
-     * <code>#</code> symbol. After that the hex
+     * <p>To use Hexadecimal colors the message must contain
+     * the identifier (which is {@code &}) and a
+     * {@code #} symbol. After that the hex
      * color code will start.
      * The hex color code will stop when there is
      * a character that is not in the range of
-     * <code>0</code>-<code>f</code> or there is a <code>;</code>. <br><br>
+     * {@code 0}-{@code f} or there is a {@code ;}. </p>
      *
-     * So when a message starts with a letter like an <code>a</code>
-     * the message should use a <code>;</code> so that this
-     * letter is not read as a part of the hex color code. <br><br>
+     * <p>So when a message starts with a letter like an {@code a}
+     * the message should use a {@code ;} so that this
+     * letter is not read as a part of the hex color code.</p>
      *
-     * When the hex color code is not valid it will be read
-     * as a normal string and included into the message. <br><br>
+     * <p>When the hex color code is not valid it will be read
+     * as a normal string and included into the message.</p>
      *
-     * So a message with hex color codes would look
-     * like this: <br><br>
+     * <p>So a message with hex color codes would look
+     * like this:</p> <br>
      *
-     * <code>&#da6000;A simple&r test &#B7088Amessage.</code><br><br>
+     * <pre>
+     *     {@code &#da6000;A simple&r test &#B7088Amessage.}
+     * </pre>
      *
      * <hr>
+     * <br>
      *
-     * Both of the ways of formatting a message - as seen
-     * in the previous example - can be used together.
+     * <p>Both of the ways of formatting a message - as seen
+     * in the previous example - can be used together.</p>
      *
      * @param message The raw message as a string
      * @return An array of TextComponents that resemble the message

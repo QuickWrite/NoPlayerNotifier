@@ -20,7 +20,7 @@ public final class NPNReload extends Command implements TabExecutor {
     private final NoPlayerNotifier noPlayerNotifier;
 
     /**
-     * The <code>NPNReload</code> command that allows
+     * The {@code NPNReload} command that allows
      * the sender to reload the config so that
      * the Bungee does not reload itself.
      *
@@ -36,8 +36,8 @@ public final class NPNReload extends Command implements TabExecutor {
 
     /**
      * Executes when a player sends the command
-     * <code>/npnreload</code> in chat or the
-     * console is sending <code>npnreload</code>
+     * {@code /npnreload} in chat or the
+     * console is sending {@code npnreload}
      *
      * @param sender The sender of the command
      * @param args The arguments the command has
@@ -71,7 +71,7 @@ public final class NPNReload extends Command implements TabExecutor {
 
     /**
      * Checks if the sender has the
-     * <code>noplayernotifier.reload</code> permission
+     * {@code noplayernotifier.reload} permission
      *
      * @param sender The sender of the command
      * @return If the sender has the permission

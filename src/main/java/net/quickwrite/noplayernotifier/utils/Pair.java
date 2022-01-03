@@ -1,5 +1,12 @@
 package net.quickwrite.noplayernotifier.utils;
 
+/**
+ * A simple Pair that holds two seperate values.
+ *
+ * @author QuickWrite
+ * @param <T> The first value
+ * @param <E> The second value
+ */
 public class Pair<T, E> {
     private final T value1;
     private final E value2;

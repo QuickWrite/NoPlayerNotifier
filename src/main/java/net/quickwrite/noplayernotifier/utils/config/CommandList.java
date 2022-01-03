@@ -20,7 +20,7 @@ public final class CommandList {
     private final Map<String, Command> commands = new HashMap<>();
 
     /**
-     * Adds a single command to the <code>commands</code>
+     * Adds a single command to the {@code commands}
      * HashMap with the return message and the permission
      *
      * @param command The command itself
@@ -34,7 +34,7 @@ public final class CommandList {
     /**
      * Returns the message of the command
      *
-     * If there is no command the return will be <code>null</code>
+     * If there is no command the return will be {@code null}
      *
      * @param command The command
      * @return The message that should be send

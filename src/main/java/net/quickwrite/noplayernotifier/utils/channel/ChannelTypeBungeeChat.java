@@ -6,6 +6,10 @@ import net.md_5.bungee.api.event.ChatEvent;
 
 import java.util.Objects;
 
+/**
+ * The {@link ChannelType} message checker
+ * if there is BungeeChat installed.
+ */
 public final class ChannelTypeBungeeChat extends ChannelType {
     /**
      * Checks if the message is send in the local chat
@@ -15,7 +19,7 @@ public final class ChannelTypeBungeeChat extends ChannelType {
      * it checks if the message is send in the BungeeChat
      * LOCAL chat as well.
      *
-     * @param event The <code>ChatEvent</code> that is checked
+     * @param event The {@link ChatEvent} that is checked
      * @param prefix The prefix that is stored in the config
      * @return If the message is send in the local chat
      */
@@ -32,6 +36,7 @@ public final class ChannelTypeBungeeChat extends ChannelType {
      * @return The channel type
      */
     private dev.aura.bungeechat.api.enums.ChannelType getChannelType(final ProxiedPlayer player) {
-        return Objects.requireNonNull(AccountManager.getAccount(player.getUniqueId()).orElse(null)).getChannelType();
+        return Objects.requireNonNull(AccountManager.getAccount(player.getUniqueId()).orElse(null))
+                .getChannelType();
     }
 }

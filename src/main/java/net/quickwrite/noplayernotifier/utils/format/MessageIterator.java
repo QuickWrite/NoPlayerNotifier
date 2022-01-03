@@ -32,7 +32,7 @@ public class MessageIterator {
      *
      * <br><br>
      *
-     * Sets the identifier to the value <code>&</code>.
+     * Sets the identifier to the value {@code &}.
      *
      * @param message The message that should be iterated over.
      */
