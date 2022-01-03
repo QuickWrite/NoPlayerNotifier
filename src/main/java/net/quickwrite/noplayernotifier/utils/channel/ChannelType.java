@@ -2,12 +2,16 @@ package net.quickwrite.noplayernotifier.utils.channel;
 
 import net.md_5.bungee.api.event.ChatEvent;
 
+/**
+ * The ChannelType the message
+ * should be checked against.
+ */
 public abstract class ChannelType {
     /**
      * Checks if the message is send in the local chat
      * or if the message is send in a different chat.
      *
-     * @param event The <code>ChatEvent</code> that is checked
+     * @param event The {@link ChatEvent} that is checked
      * @param prefix The prefix that is stored in the config
      * @return If the message is send in the local chat
      */
