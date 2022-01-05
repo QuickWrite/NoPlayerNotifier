@@ -40,14 +40,16 @@ public final class NPNReload extends Command implements TabExecutor {
      */
     @Override
     public void execute(final CommandSender sender, final String[] args) {
+        final Config config = Config.getConfig();
+
         if(!hasPermission(sender)) {
-            sender.sendMessage(new TextComponent(ChatColor.RED + "I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is a mistake."));
+            sender.sendMessage(config.getMsg().getPermissionError());
             return;
         }
 
-        Config.getConfig().storeConfiguration(noPlayerNotifier.getConfiguration());
+        config.storeConfiguration(noPlayerNotifier.getConfiguration());
 
-        sender.sendMessage(new TextComponent(ChatColor.GREEN + "Reloaded"));
+        sender.sendMessage(config.getMsg().getReloadSuccess());
     }
 
     /**

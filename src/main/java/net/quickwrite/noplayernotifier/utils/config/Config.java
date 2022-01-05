@@ -2,6 +2,9 @@ package net.quickwrite.noplayernotifier.utils.config;
 
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.config.Configuration;
+import net.quickwrite.noplayernotifier.utils.config.holders.CommandList;
+import net.quickwrite.noplayernotifier.utils.config.holders.PlayerMessages;
+import net.quickwrite.noplayernotifier.utils.format.MessageCombiner;
 import net.quickwrite.noplayernotifier.utils.format.MessageFormatter;
 
 import java.util.ArrayList;
@@ -17,10 +20,14 @@ public final class Config {
     private static Config instance = null;
 
     private String prefix;
-    private String msgPrefix;
-    private TextComponent messageServer;
-    private TextComponent messageBungee;
-    private final CommandList commandList = new CommandList();
+
+    private static final PlayerMessages playerMessages;
+    private static final CommandList commandList;
+
+    static {
+        playerMessages = new PlayerMessages();
+        commandList = new CommandList();
+    }
 
     /**
      * The class that is used as a intermediate step to store
@@ -35,8 +42,13 @@ public final class Config {
             this.prefix = null;
     }
 
-    private void setMsgPrefix(final String msgPrefix) {
-        this.msgPrefix = msgPrefix;
+    /**
+     * Returns the prefix stored in the config
+     *
+     * @return The prefix
+     */
+    public String getPrefix() {
+        return prefix;
     }
 
     private void setCommandList(final Configuration commands) {
@@ -45,7 +57,7 @@ public final class Config {
         commandList.clear();
 
         for (String command : collection) {
-            TextComponent message = createTextComponent(commands.getStringList(command + ".message"));
+            TextComponent message = MessageCombiner.createTextComponent(commands.getStringList(command + ".message"));
 
             String permission = commands.getString(command + ".permission");
 
@@ -77,59 +89,6 @@ public final class Config {
     }
 
     /**
-     * Creates a TextComponent from a list of strings with
-     * color codes
-     *
-     * @param text The list of lines of test
-     * @return The TextComponent
-     */
-    private TextComponent createTextComponent(List<String> text) {
-        return new TextComponent(MessageFormatter.format(concatenateStrings(msgPrefix, text)));
-    }
-
-    /**
-     * Concatenates the strings in the list with
-     * \n so that these can be used as one
-     * simple string itself.
-     *
-     * @param messages The List of strings
-     * @return The concatenated string
-     */
-    private String concatenateStrings(String prefix, List<String> messages) {
-        return prefix + String.join("\n", messages);
-    }
-
-    private void setMessageServer(final List<String> messageServer) {
-        this.messageServer = createTextComponent(messageServer);
-    }
-
-    /**
-     * Returns the message for the
-     * NoPlayerServer event as a
-     * TextComponent
-     *
-     * @return The message
-     */
-    public TextComponent getMessageServer() {
-        return this.messageServer;
-    }
-
-    private void setMessageBungee(final List<String> messageBungee) {
-        this.messageBungee = createTextComponent(messageBungee);
-    }
-
-    /**
-     * Returns the message for the
-     * NoPlayerBungee event as a
-     * TextComponent
-     *
-     * @return The message
-     */
-    public TextComponent getMessageBungee() {
-        return this.messageBungee;
-    }
-
-    /**
      * Returns the message for a command and {@code null} if it does not exist.
      *
      * @param command The command itself ({@code /} not included)
@@ -137,6 +96,10 @@ public final class Config {
      */
     public CommandList.Command getCommand(String command) {
         return commandList.getMessage(command);
+    }
+
+    public PlayerMessages getMsg() {
+        return playerMessages;
     }
 
     /**
@@ -153,18 +116,12 @@ public final class Config {
 
     public void storeConfiguration(Configuration configuration) {
         setPrefix(configuration.getString("prefix"));
-        setMsgPrefix(configuration.getString("msg_prefix"));
-        setMessageServer(configuration.getStringList("msg_nobody_online_server"));
-        setMessageBungee(configuration.getStringList("msg_nobody_online_bungee"));
+        MessageCombiner.setMsgPrefix(configuration.getString("msg_prefix"));
+        playerMessages.setMessageServer(configuration.getStringList("msg_nobody_online_server"));
+        playerMessages.setMessageBungee(configuration.getStringList("msg_nobody_online_bungee"));
         setCommandList(configuration.getSection("commands"));
-    }
 
-    /**
-     * Returns the prefix stored in the config
-     *
-     * @return The prefix
-     */
-    public String getPrefix() {
-        return prefix;
+        playerMessages.setPermissionError(configuration.getString("npnreload.permission_error"));
+        playerMessages.setReloadSuccess(configuration.getString("npnreload.reload_successful"));
     }
 }

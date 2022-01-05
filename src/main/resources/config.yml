@@ -23,6 +23,10 @@ msg_prefix: "&8[&2Prefix&8]&r "
 msg_nobody_online_server:
   - "Currently nobody on this server is online! To message the others, write !<message>."
 
+npnreload:
+  permission_error: "&cI'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is a mistake."
+  reload_successful: "&2Success"
+
 # The message when nobody is online on
 # the whole bungee server network.
 msg_nobody_online_bungee:
