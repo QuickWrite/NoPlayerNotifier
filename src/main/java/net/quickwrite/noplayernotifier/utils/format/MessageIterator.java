@@ -17,8 +17,6 @@ public class MessageIterator {
     private int iterator = -1;
     private final char identifier;
 
-    private static final String COLOR_CHARS = "0123456789abcdef";
-    private static final String ATTRIBUTE_CHARS = "klmno";
     private static final char RESET_IDENTIFIER = 'r';
     private static final char HEX_IDENTIFIER = '#';
     private static final char DELIMITER = ';';
@@ -115,11 +113,11 @@ public class MessageIterator {
             return 1;
         }
 
-        if(contains(COLOR_CHARS, character)) {
+        if(isColorChar(character)) {
             currentColor = ChatColor.getByChar(character);
 
             return 1;
-        } else if(contains(ATTRIBUTE_CHARS, character)) {
+        } else if(isAttributeChar(character)) {
             attributes.set(character);
 
             return 1;
@@ -150,7 +148,7 @@ public class MessageIterator {
                 break;
             }
 
-            if (!contains(COLOR_CHARS, character)) {
+            if (!isColorChar(character)) {
                 iterator--;
 
                 break;
@@ -197,14 +195,34 @@ public class MessageIterator {
     }
 
     /**
-     * Checks if a character is in a String.
+     * <p>Checks if the character is a hexadecimal
+     * color char from {@code 0-9} and {@code a-f}.
+     * </p>
      *
-     * @param list The String that should be checked.
-     * @param character The char that should be in the String
-     * @return If the char is in the String
+     * <p>It is case insensitive</p>
+     *
+     * @param character The character that should be checked against
+     * @return If the character is in the boundaries
      */
-    private boolean contains(String list, char character) {
-        return list.contains(Character.toLowerCase(character) + "");
+    private boolean isColorChar(char character) {
+        return (character >= 'a' && character <= 'f') ||
+                (character >= 'A' && character <= 'F') ||
+                (character >= '0' && character <= '9');
+    }
+
+    /**
+     * <p>Checks if the character is an attribute
+     * char from {@code k-o}.
+     * </p>
+     *
+     * <p>It is case insensitive</p>
+     *
+     * @param character The character that should be checked against
+     * @return If the character is in the boundaries
+     */
+    private boolean isAttributeChar(char character) {
+        return (character >= 'k' && character <= 'o') ||
+                (character >= 'K' && character <= 'O');
     }
 
     /**
@@ -221,7 +239,6 @@ public class MessageIterator {
          * Adds the attributes to the TextComponent
          *
          * @param component The TextComponent
-         * @return The TextComponent
          */
         public void addAttributes(TextComponent component) {
             component.setBold(isBold);
