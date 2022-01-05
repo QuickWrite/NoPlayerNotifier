@@ -14,38 +14,35 @@ import java.util.List;
  * @author QuickWrite
  */
 public final class Config {
-    private final String prefix;
-    private final String msgPrefix;
-    private final TextComponent messageServer;
-    private final TextComponent messageBungee;
+    private static Config instance = null;
+
+    private String prefix;
+    private String msgPrefix;
+    private TextComponent messageServer;
+    private TextComponent messageBungee;
     private final CommandList commandList = new CommandList();
 
     /**
      * The class that is used as a intermediate step to store
      * the config
-     *
-     * @param prefix The prefix that global messages have
-     * @param msgPrefix The prefix for the returned messages
-     * @param messageServer The message when nobody is on the same server
-     * @param messageBungee The message when nobody is on the same bungee
-     * @param commands The commands that should be included
      */
-    public Config(final String prefix,
-                  final String msgPrefix,
-                  final List<String> messageServer,
-                  final List<String> messageBungee,
-                  final Configuration commands) {
+    private Config() { }
+
+    private void setPrefix(final String prefix) {
         if(!prefix.equals(""))
             this.prefix = prefix;
         else
             this.prefix = null;
+    }
 
+    private void setMsgPrefix(final String msgPrefix) {
         this.msgPrefix = msgPrefix;
+    }
 
-        this.messageServer = createTextComponent(messageServer);
-        this.messageBungee = createTextComponent(messageBungee);
-
+    private void setCommandList(final Configuration commands) {
         final Collection<String> collection = commands.getKeys();
+
+        commandList.clear();
 
         for (String command : collection) {
             TextComponent message = createTextComponent(commands.getStringList(command + ".message"));
@@ -102,6 +99,10 @@ public final class Config {
         return prefix + String.join("\n", messages);
     }
 
+    private void setMessageServer(final List<String> messageServer) {
+        this.messageServer = createTextComponent(messageServer);
+    }
+
     /**
      * Returns the message for the
      * NoPlayerServer event as a
@@ -111,6 +112,10 @@ public final class Config {
      */
     public TextComponent getMessageServer() {
         return this.messageServer;
+    }
+
+    private void setMessageBungee(final List<String> messageBungee) {
+        this.messageBungee = createTextComponent(messageBungee);
     }
 
     /**
@@ -137,17 +142,21 @@ public final class Config {
     /**
      * Returns a Config-Object instantiated.
      *
-     * @param configuration The configuration Object
      * @return The Config Object
      */
-    public static Config getConfig(Configuration configuration) {
-        return new Config(
-                configuration.getString("prefix"),
-                configuration.getString("msg_prefix"),
-                configuration.getStringList("msg_nobody_online_server"),
-                configuration.getStringList("msg_nobody_online_bungee"),
-                configuration.getSection("commands")
-        );
+    public static Config getConfig() {
+        if (instance == null)
+            instance = new Config();
+
+        return instance;
+    }
+
+    public void storeConfiguration(Configuration configuration) {
+        setPrefix(configuration.getString("prefix"));
+        setMsgPrefix(configuration.getString("msg_prefix"));
+        setMessageServer(configuration.getStringList("msg_nobody_online_server"));
+        setMessageBungee(configuration.getStringList("msg_nobody_online_bungee"));
+        setCommandList(configuration.getSection("commands"));
     }
 
     /**

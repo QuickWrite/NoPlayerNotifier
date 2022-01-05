@@ -43,6 +43,10 @@ public final class CommandList {
         return commands.get(command);
     }
 
+    public void clear() {
+        commands.clear();
+    }
+
     /**
      * @author QuickWrite
      */

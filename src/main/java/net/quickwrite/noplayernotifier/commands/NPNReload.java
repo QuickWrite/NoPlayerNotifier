@@ -7,7 +7,6 @@ import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
 import net.quickwrite.noplayernotifier.NoPlayerNotifier;
 import net.quickwrite.noplayernotifier.utils.config.Config;
-import net.quickwrite.noplayernotifier.listeners.MessageListener;
 import net.quickwrite.noplayernotifier.utils.Permission;
 
 import java.util.Collections;
@@ -16,7 +15,6 @@ import java.util.Collections;
  * @author QuickWrite
  */
 public final class NPNReload extends Command implements TabExecutor {
-    private final MessageListener messageListener;
     private final NoPlayerNotifier noPlayerNotifier;
 
     /**
@@ -25,13 +23,11 @@ public final class NPNReload extends Command implements TabExecutor {
      * the Bungee does not reload itself.
      *
      * @param noPlayerNotifier The instance of the main class
-     * @param messageListener The message listener that gets all of the messages
      */
-    public NPNReload(final NoPlayerNotifier noPlayerNotifier, final MessageListener messageListener) {
+    public NPNReload(final NoPlayerNotifier noPlayerNotifier) {
         super("npnreload");
 
         this.noPlayerNotifier = noPlayerNotifier;
-        this.messageListener = messageListener;
     }
 
     /**
@@ -49,7 +45,7 @@ public final class NPNReload extends Command implements TabExecutor {
             return;
         }
 
-        messageListener.setConfig(Config.getConfig(noPlayerNotifier.getConfiguration()));
+        Config.getConfig().storeConfiguration(noPlayerNotifier.getConfiguration());
 
         sender.sendMessage(new TextComponent(ChatColor.GREEN + "Reloaded"));
     }

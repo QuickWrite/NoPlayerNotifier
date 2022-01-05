@@ -22,14 +22,13 @@ import java.io.*;
 public final class NoPlayerNotifier extends Plugin {
     @Override
     public void onEnable() {
-        Config config = Config.getConfig(getConfiguration());
+        Config.getConfig().storeConfiguration(getConfiguration());
 
         PluginManager pluginManager = this.getProxy().getPluginManager();
 
-        MessageListener messageListener = new MessageListener(config,
-                pluginExists("BungeeChat") ? new ChannelTypeBungeeChat() : new ChannelTypeChat());
+        MessageListener messageListener = new MessageListener(pluginExists("BungeeChat") ? new ChannelTypeBungeeChat() : new ChannelTypeChat());
 
-        pluginManager.registerCommand(this, new NPNReload(this, messageListener));
+        pluginManager.registerCommand(this, new NPNReload(this));
         pluginManager.registerListener(this, messageListener);
     }
 

@@ -14,7 +14,6 @@ import net.quickwrite.noplayernotifier.utils.channel.ChannelType;
  * @author QuickWrite
  */
 public class MessageListener implements Listener {
-    private Config config;
     private final ChannelType channelType;
 
     /**
@@ -23,11 +22,9 @@ public class MessageListener implements Listener {
      * is on the server and sending a
      * message.
      *
-     * @param config The messages that are saved in the config
      * @param channelType The {@link ChannelType} so that the messages can be checked accordingly.
      */
-    public MessageListener(final Config config, final ChannelType channelType) {
-        this.config = config;
+    public MessageListener(final ChannelType channelType) {
         this.channelType = channelType;
     }
 
@@ -49,6 +46,8 @@ public class MessageListener implements Listener {
                 player.hasPermission(Permission.BYPASS.toString())
         )
             return;
+
+        final Config config = Config.getConfig();
 
         if(event.isCommand()) {
             CommandList.Command command = config.getCommand(
@@ -78,14 +77,5 @@ public class MessageListener implements Listener {
         if(player.getServer().getInfo().getPlayers().size() == 1 && channelType.isLocal(event, config.getPrefix())) {
             player.sendMessage(config.getMessageServer());
         }
-    }
-
-    /**
-     * Sets the config attribute in the class
-     *
-     * @param config The config class
-     */
-    public void setConfig(final Config config) {
-        this.config = config;
     }
 }
