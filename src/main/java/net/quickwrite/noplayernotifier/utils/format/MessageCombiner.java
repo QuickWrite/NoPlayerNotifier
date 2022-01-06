@@ -12,6 +12,8 @@ import java.util.List;
 public class MessageCombiner {
     private static String msgPrefix;
 
+    private MessageCombiner() { }
+
     /**
      * Sets the msgPrefix for all of the messages.
      * @param messagePrefix The Message Prefix.

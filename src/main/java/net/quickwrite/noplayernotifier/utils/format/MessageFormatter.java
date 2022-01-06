@@ -12,6 +12,8 @@ import java.util.List;
  */
 public final class MessageFormatter {
 
+    private MessageFormatter() { }
+
     /**
      * <p>Formats the message with color codes
      * and custom hex codes.</p>
