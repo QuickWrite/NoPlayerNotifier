@@ -12,6 +12,8 @@ import java.util.List;
  */
 public final class MessageFormatter {
 
+    private MessageFormatter() { }
+
     /**
      * <p>Formats the message with color codes
      * and custom hex codes.</p>
@@ -85,7 +87,9 @@ public final class MessageFormatter {
         TextComponent nextItem = messageIterator.toNext();
 
         while(nextItem != null) {
-            textComponentList.add(nextItem);
+            if(!nextItem.getText().equals("")) {
+                textComponentList.add(nextItem);
+            }
 
             nextItem = messageIterator.toNext();
         }

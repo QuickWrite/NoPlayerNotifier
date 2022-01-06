@@ -20,16 +20,19 @@ import java.io.*;
  * @author QuickWrite
  */
 public final class NoPlayerNotifier extends Plugin {
+    private static NoPlayerNotifier instance;
+
     @Override
     public void onEnable() {
-        Config config = Config.getConfig(getConfiguration());
+        instance = this;
+
+        Config.getConfig().storeConfiguration(getConfiguration());
 
         PluginManager pluginManager = this.getProxy().getPluginManager();
 
-        MessageListener messageListener = new MessageListener(config,
-                pluginExists("BungeeChat") ? new ChannelTypeBungeeChat() : new ChannelTypeChat());
+        MessageListener messageListener = new MessageListener(pluginExists("BungeeChat") ? new ChannelTypeBungeeChat() : new ChannelTypeChat());
 
-        pluginManager.registerCommand(this, new NPNReload(this, messageListener));
+        pluginManager.registerCommand(this, new NPNReload(instance));
         pluginManager.registerListener(this, messageListener);
     }
 
@@ -47,6 +50,16 @@ public final class NoPlayerNotifier extends Plugin {
      */
     private boolean pluginExists(final String pluginName) {
         return getProxy().getPluginManager().getPlugin(pluginName) != null;
+    }
+
+    /**
+     * Returns the instance of the
+     * plugin itself.
+     *
+     * @return The instance of NoPlayerNotifier
+     */
+    public static NoPlayerNotifier getInstance() {
+        return instance;
     }
 
     /**

@@ -5,7 +5,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
-import net.quickwrite.noplayernotifier.utils.config.CommandList;
+import net.quickwrite.noplayernotifier.utils.config.holders.CommandList;
 import net.quickwrite.noplayernotifier.utils.config.Config;
 import net.quickwrite.noplayernotifier.utils.Permission;
 import net.quickwrite.noplayernotifier.utils.channel.ChannelType;
@@ -14,7 +14,6 @@ import net.quickwrite.noplayernotifier.utils.channel.ChannelType;
  * @author QuickWrite
  */
 public class MessageListener implements Listener {
-    private Config config;
     private final ChannelType channelType;
 
     /**
@@ -23,11 +22,9 @@ public class MessageListener implements Listener {
      * is on the server and sending a
      * message.
      *
-     * @param config The messages that are saved in the config
      * @param channelType The {@link ChannelType} so that the messages can be checked accordingly.
      */
-    public MessageListener(final Config config, final ChannelType channelType) {
-        this.config = config;
+    public MessageListener(final ChannelType channelType) {
         this.channelType = channelType;
     }
 
@@ -50,6 +47,8 @@ public class MessageListener implements Listener {
         )
             return;
 
+        final Config config = Config.getConfig();
+
         if(event.isCommand()) {
             CommandList.Command command = config.getCommand(
                     event.getMessage()
@@ -70,22 +69,13 @@ public class MessageListener implements Listener {
 
         // When the player is alone on the bungee
         if(ProxyServer.getInstance().getPlayers().size() == 1) {
-            player.sendMessage(config.getMessageBungee());
+            player.sendMessage(config.getMsg().getMessageBungee());
             return;
         }
 
         // When the player is alone on the server
         if(player.getServer().getInfo().getPlayers().size() == 1 && channelType.isLocal(event, config.getPrefix())) {
-            player.sendMessage(config.getMessageServer());
+            player.sendMessage(config.getMsg().getMessageServer());
         }
-    }
-
-    /**
-     * Sets the config attribute in the class
-     *
-     * @param config The config class
-     */
-    public void setConfig(final Config config) {
-        this.config = config;
     }
 }
