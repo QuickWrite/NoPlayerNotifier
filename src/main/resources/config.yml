@@ -23,9 +23,15 @@ msg_prefix: "&8[&2Prefix&8]&r "
 msg_nobody_online_server:
   - "Currently nobody on this server is online! To message the others, write !<message>."
 
+# The messages that should be send to the
+# user of the `/npnreload` command.
+#
+# This category is not necessary and could be removed.
+# When these messages do not exist in this file the
+# default messages will be used by the plugin.
 npnreload:
   permission_error: "&cI'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is a mistake."
-  reload_successful: "&2Success"
+  reload_successful: "&2Successfully reloaded NoPlayerNotifier"
 
 # The message when nobody is online on
 # the whole bungee server network.

@@ -52,6 +52,12 @@ public final class NoPlayerNotifier extends Plugin {
         return getProxy().getPluginManager().getPlugin(pluginName) != null;
     }
 
+    /**
+     * Returns the instance of the
+     * plugin itself.
+     *
+     * @return The instance of NoPlayerNotifier
+     */
     public static NoPlayerNotifier getInstance() {
         return instance;
     }

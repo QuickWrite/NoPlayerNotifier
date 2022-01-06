@@ -43,11 +43,17 @@ public final class CommandList {
         return commands.get(command);
     }
 
+    /**
+     * Removes everything from the
+     * CommandList.
+     */
     public void clear() {
         commands.clear();
     }
 
     /**
+     * A single command saved with values.
+     * 
      * @author QuickWrite
      */
     public static final class Command {

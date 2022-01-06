@@ -35,6 +35,17 @@ public final class Config {
      */
     private Config() { }
 
+    /**
+     * Sets the prefix that the messages
+     * should be checked against.
+     *
+     * When the prefix is {@code ""}
+     * no prefix will be checked and all of
+     * the messages will return a
+     * NoPlayerNotifier message.
+     *
+     * @param prefix The prefix
+     */
     private void setPrefix(final String prefix) {
         if(!prefix.equals(""))
             this.prefix = prefix;
@@ -51,6 +62,12 @@ public final class Config {
         return prefix;
     }
 
+    /**
+     * Stores all of the commands that are
+     * set in the Configuration.
+     *
+     * @param commands The Configuration object that holds the commands
+     */
     private void setCommandList(final Configuration commands) {
         final Collection<String> collection = commands.getKeys();
 
@@ -98,6 +115,12 @@ public final class Config {
         return commandList.getMessage(command);
     }
 
+    /**
+     * Returns the {@link PlayerMessages} object
+     * that has all of the messages for the player.
+     *
+     * @return The {@link PlayerMessages} object.
+     */
     public PlayerMessages getMsg() {
         return playerMessages;
     }
@@ -114,6 +137,12 @@ public final class Config {
         return instance;
     }
 
+    /**
+     * Stores a Configuration object into this object
+     * so that it is easier to use later.
+     *
+     * @param configuration The configuration that should be saved.
+     */
     public void storeConfiguration(Configuration configuration) {
         setPrefix(configuration.getString("prefix"));
         MessageCombiner.setMsgPrefix(configuration.getString("msg_prefix"));
