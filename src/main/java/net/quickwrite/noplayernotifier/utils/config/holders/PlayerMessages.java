@@ -6,6 +6,7 @@ import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 import net.quickwrite.noplayernotifier.NoPlayerNotifier;
 import net.quickwrite.noplayernotifier.utils.format.MessageCombiner;
+import net.quickwrite.noplayernotifier.utils.format.MessageFormatter;
 
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class PlayerMessages {
             permissionError = getConfig().getString("npnreload.permission_error");
         }
 
-        this.permissionError = MessageCombiner.createTextComponent(permissionError, false);
+        this.permissionError = MessageFormatter.format(permissionError)[0];
     }
 
     public TextComponent getPermissionError() {

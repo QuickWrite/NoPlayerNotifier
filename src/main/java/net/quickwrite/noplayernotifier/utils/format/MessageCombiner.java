@@ -26,10 +26,6 @@ public class MessageCombiner {
         return new TextComponent(MessageFormatter.format(msgPrefix + text));
     }
 
-    public static TextComponent createTextComponent(String text, boolean hasPrefix) {
-        return new TextComponent(MessageFormatter.format((hasPrefix ? msgPrefix : "") + text));
-    }
-
     /**
      * Concatenates the strings in the list with
      * \n so that these can be used as one

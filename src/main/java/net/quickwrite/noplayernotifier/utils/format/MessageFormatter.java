@@ -85,7 +85,9 @@ public final class MessageFormatter {
         TextComponent nextItem = messageIterator.toNext();
 
         while(nextItem != null) {
-            textComponentList.add(nextItem);
+            if(!nextItem.getText().equals("")) {
+                textComponentList.add(nextItem);
+            }
 
             nextItem = messageIterator.toNext();
         }
