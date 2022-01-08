@@ -23,9 +23,12 @@ public final class NoPlayerNotifier extends Plugin {
     private static NoPlayerNotifier instance;
 
     @Override
-    public void onEnable() {
+    public void onLoad() {
         instance = this;
+    }
 
+    @Override
+    public void onEnable() {
         Config.getConfig().storeConfiguration(getConfiguration());
 
         PluginManager pluginManager = this.getProxy().getPluginManager();
@@ -85,7 +88,7 @@ public final class NoPlayerNotifier extends Plugin {
                 if(!file.createNewFile())
                     throw new RuntimeException();
 
-                try (InputStream is = getResourceAsStream("config.yml");
+                try (InputStream is = getResourceAsStream("defaults/config.yml");
                      OutputStream os = new FileOutputStream(file)) {
                     ByteStreams.copy(is, os);
                 }
