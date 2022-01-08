@@ -24,6 +24,9 @@ When you found out that you made a mistake in the `config.yml` you can just use 
 ## Why is it useful?
 It can be used to explain the chat system the server uses as not everyone understands the idea that every server has a different chat. This can be a common problem on BungeeCord/ Waterfall servers as many servers need to be connected, and the chat should be as clean as possible.
 
+## Spigot Page
+The Spigot Page for this plugin can be found [here](https://www.spigotmc.org/resources/noplayernotifier.98053/). With the plugin there is also the documentation hosted [there](https://www.spigotmc.org/resources/noplayernotifier.98053/field?field=documentation).
+
 ## Contribute
 If you find a bug, or you have an idea for the Plugin just create an Issue or if you know how to implement it, create a Pull Request.
 
