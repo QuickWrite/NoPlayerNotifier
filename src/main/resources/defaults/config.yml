@@ -23,6 +23,11 @@ msg_prefix: "&8[&2Prefix&8]&r "
 msg_nobody_online_server:
   - "Currently nobody on this server is online! To message the others, write !<message>."
 
+# The message when nobody is online on
+# the whole bungee server network.
+msg_nobody_online_bungee:
+  - "Currently nobody on this server is online!"
+  
 # The messages that should be send to the
 # user of the `/npnreload` command.
 #
@@ -32,11 +37,6 @@ msg_nobody_online_server:
 npnreload:
   permission_error: "&cI'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is a mistake."
   reload_successful: "&2Successfully reloaded NoPlayerNotifier"
-
-# The message when nobody is online on
-# the whole bungee server network.
-msg_nobody_online_bungee:
-  - "Currently nobody on this server is online!"
 
 # The different commands where messages are send to the player
 # commands.<commandname> is the command name itself
@@ -50,10 +50,4 @@ msg_nobody_online_bungee:
 # send, but when there is a player on the bungee with this permission
 # the message won't be send.
 commands:
-  test:
-    permission: "mypermission.permission"
-    aliases:
-      - "testhere"
-    message:
-      - "&bCurrently nobody is online that has the"
-      - "  &3mypermission.permission&r permission"
+  
