@@ -28,7 +28,7 @@ jobs:
       - name: Create necessary directories
         run: |
            mkdir staging
-           find target/ -regex "^(?!original-).+" -exec mv '{}' staging \;
+           find target/ -regex "^(.+?(?=\/))*\/(?!original-).+$" -exec mv '{}' staging \;
       
       - name: Upload artifact
         uses: actions/upload-artifact@v3
